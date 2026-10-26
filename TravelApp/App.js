@@ -1,22 +1,37 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+} from "@react-navigation/bottom-tabs";
+
+// importing the screens
+import HomeScreen from "./src/screens/HomeScreen";
+import Create from "./src/screens/Create";
+import Journals from "./src/screens/Journals";
+import Settings from "./src/screens/Settings";
+
+// create navigators
+const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
+
+// stack navigator
+function StackNavigator() {
+  // this needs to be filled with like pages that stack further, for example, the journal page for example
+  // my travel journals > specific journal > detailed view of maps, photos, etc
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Create" component={Create} />
+        <Tab.Screen name="Journals" component={Journals} />
+        <Tab.Screen name="Settings" component={Settings} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
