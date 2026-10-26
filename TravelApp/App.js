@@ -29,13 +29,13 @@ function authentificationNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="SignIn" component={SignIn} />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Create" component={Create} />
-        <Tab.Screen name="Journals" component={Journals} />
-        <Tab.Screen name="Settings" component={Settings} />
-      </Tab.Navigator>
+      <BottomTab.Navigator>
+        <BottomTab.Screen name="Sign In" component={SignIn} />
+        <BottomTab.Screen name="Home" component={HomeScreen} />
+        <BottomTab.Screen name="Create" component={Create} />
+        <BottomTab.Screen name="Journals" component={Journals} />
+        <BottomTab.Screen name="Settings" component={Settings} />
+      </BottomTab.Navigator>
     </NavigationContainer>
   );
 }

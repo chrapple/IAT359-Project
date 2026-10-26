@@ -1,9 +1,5 @@
 import { Pressable, Text, TextInput, View } from "react-native";
 import { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 import { firebase_auth } from "../firebaseConfig";
 import styles from "../styles";
 
@@ -19,17 +15,19 @@ export default function SignIn() {
     <View style={styles.container}>
       <Text style={styles.title}>App Name</Text>
       <Text>Sign In/Log In</Text>
-      <TextInput>
+      <TextInput
         style={styles.input}
-        placeholder="Email" value={email}
+        placeholder="Email"
+        value={email}
         onChangeText={setEmail}
-      </TextInput>
-      <TextInput>
+      />
+      <TextInput
         style={styles.input}
-        placeholder="Password" secureTextEntry={true}
+        placeholder="Password"
+        secureTextEntry={true}
         value={password}
         onChangeText={setPassword}
-      </TextInput>
+      />
 
       <View style={styles.signinContainer}>
         <Pressable style={styles.signinButton} title="Sign Up" />

@@ -11,7 +11,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    padding: 5,
+    height: 40,
+    width: "70%",
+    borderColor: "#ccc",
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    backgroundColor: "white",
   },
   signincontainer: {
     display: "flex",
