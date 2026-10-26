@@ -3,7 +3,7 @@ import styles from "../styles";
 
 export default function Journal() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Create a new Journal</Text>
     </View>
   );

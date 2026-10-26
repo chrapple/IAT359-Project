@@ -3,8 +3,8 @@ import styles from "../styles";
 
 export default function HomeScreen() {
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
     </View>
   );
 }

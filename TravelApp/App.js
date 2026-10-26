@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // importing the screens
+import SignIn from "./src/screens/SignIn";
 import HomeScreen from "./src/screens/HomeScreen";
 import Create from "./src/screens/Create";
 import Journals from "./src/screens/Journals";
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="SignIn" component={SignIn} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Create" component={Create} />
         <Tab.Screen name="Journals" component={Journals} />

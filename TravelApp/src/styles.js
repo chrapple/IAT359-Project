@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  input: {
+    padding: 5,
+  },
 });
 
 export default styles;

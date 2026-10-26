@@ -3,7 +3,7 @@ import styles from "../styles";
 
 export default function Settings() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Settings</Text>
     </View>
   );
