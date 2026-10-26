@@ -2,10 +2,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  createBottomTabNavigator,
-  createBottomTabScreen,
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // importing the screens
 import HomeScreen from "./src/screens/HomeScreen";
@@ -21,6 +18,11 @@ const BottomTab = createBottomTabNavigator();
 function StackNavigator() {
   // this needs to be filled with like pages that stack further, for example, the journal page for example
   // my travel journals > specific journal > detailed view of maps, photos, etc
+}
+
+// stack navigator
+function authentificationNavigator() {
+  // reference firebase auth demo lab for having the user authenticate before getting access to the rest of the app
 }
 
 export default function App() {
