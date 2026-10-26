@@ -3,12 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 24,
+    marginTop: 50,
   },
   input: {
     height: 40,
@@ -20,11 +22,22 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: "white",
   },
-  signincontainer: {
+  signinContainer: {
     display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    padding: 10,
+    marginVertical: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  signinButton: {
-    backgroundColor: "grey",
+  signinButtonsContainer: {
+    display: "flex",
+    padding: 10,
+    gap: 20,
+    flexDirection: "row",
+    flex: 1,
+    backgroundColor: "#fff",
   },
 });
 

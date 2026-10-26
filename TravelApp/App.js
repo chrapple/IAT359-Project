@@ -15,17 +15,7 @@ import Settings from "./src/screens/Settings";
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
-// stack navigator
-function StackNavigator() {
-  // this needs to be filled with like pages that stack further, for example, the journal page for example
-  // my travel journals > specific journal > detailed view of maps, photos, etc
-}
-
-// stack navigator
-function authentificationNavigator() {
-  // reference firebase auth demo lab for having the user authenticate before getting access to the rest of the app
-}
-
+// remove the sign in from here later when the authentification is figured out, move all tabs into one function (nested)
 export default function App() {
   return (
     <NavigationContainer>
