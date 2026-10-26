@@ -7,8 +7,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  title: {
+    fontSize: 24,
+  },
   input: {
     padding: 5,
+  },
+  signincontainer: {
+    display: "flex",
+  },
+  signinButton: {
+    backgroundColor: "grey",
   },
 });
 
