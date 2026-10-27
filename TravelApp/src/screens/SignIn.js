@@ -1,4 +1,4 @@
-import { Pressable, Text, TextInput, View, Button } from "react-native";
+import { Text, TextInput, View, Button } from "react-native";
 import { useState } from "react";
 import { firebase_auth } from "../firebaseConfig";
 import {
@@ -8,11 +8,13 @@ import {
 import styles from "../styles";
 
 export default function SignIn() {
+  // useStates are user information
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // manages the authentication
   const auth = firebase_auth;
 
-  // code for retrieving and storing and adding user data in firebase
+  // adding user in firebase
   async function signUpHandler() {
     try {
       // tells firebase to create a user with these details
@@ -21,27 +23,32 @@ export default function SignIn() {
         email,
         password,
       );
-      // screen switches automatically if success
+      // pops up if success
       console.log(userInfo);
       alert("Success." + email + " has been signed up.");
     } catch (error) {
       // in the case that an error occurs so that the system doesn't crash
+      // pop up alert is email is invalid, password is too weak, etc
       console.log(error.message);
       alert(error.message);
     }
   }
+  // signing into existing user in firebase
   async function logInHandler() {
     try {
       // tells firebase to log in a user with these details
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      // pops up if success
       console.log(userInfo);
       alert("Welcome back, " + email + ".");
     } catch (error) {
       // in the case that an error occurs so that the system doesn't crash
+      // pop up if user doesn't exist, etc
       console.log(error.message);
       alert(error.message);
     }
   }
+  // switching of pages from sign in to the home screen happens in App.js
 
   // ui
   return (

@@ -33,6 +33,7 @@ export default function App() {
       </BottomTab.Navigator>
     );
   }
+  // additional stack is needed for the journal route, create it below this comment
 
   useEffect(() => {
     // onAuthStateChanged from firebase sets up a listener
