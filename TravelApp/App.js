@@ -43,8 +43,6 @@ export default function App() {
     });
   }, []); // fires exactly once
 
-  // remove the sign in from here later when the authentification is figured out, move all tabs into one function (nested)
-
   return (
     <NavigationContainer>
       {/* initial route name has to match the screen name */}
