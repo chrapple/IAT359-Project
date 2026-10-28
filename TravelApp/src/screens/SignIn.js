@@ -1,4 +1,4 @@
-import { Text, TextInput, View, Button } from "react-native";
+import { Text, TextInput, View, Pressable } from "react-native";
 import { useState } from "react";
 import { firebase_auth } from "../firebaseConfig";
 import {
@@ -73,7 +73,7 @@ export default function SignIn() {
       </View>
 
       <View style={styles.signinButtonsContainer}>
-        <Button
+        {/* <Button
           style={styles.signinButton}
           title="Sign Up"
           onPress={signUpHandler}
@@ -82,7 +82,13 @@ export default function SignIn() {
           style={styles.signinButton}
           title="Log In"
           onPress={logInHandler}
-        />
+        /> */}
+        <Pressable style={styles.signinButton} onPress={signUpHandler}>
+          <Text>Sign Up</Text>
+        </Pressable>
+        <Pressable style={styles.signinButton} onPress={logInHandler}>
+          <Text>Log In</Text>
+        </Pressable>
       </View>
     </View>
   );

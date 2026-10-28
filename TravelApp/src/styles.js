@@ -37,7 +37,15 @@ const styles = StyleSheet.create({
     gap: 20,
     flexDirection: "row",
     flex: 1,
+    alignItems: "flex-start",
     backgroundColor: "#fff",
+  },
+  signinButton: {
+    padding: 15,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 50,
+    backgroundColor: "#d3e7c0",
   },
 });
 
