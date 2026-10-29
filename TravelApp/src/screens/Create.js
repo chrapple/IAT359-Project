@@ -10,7 +10,6 @@ export default function Create() {
   const [location, setLocation] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const defaultStyles = useDefaultStyles();
 
   return (
     <ScrollView>
