@@ -50,11 +50,21 @@ export default function App() {
         {/* if a user exists, go to home from the main root navigation, 
         if user is null, be on sign in screen*/}
         {user ? (
-          <Stack.Screen name="Home" component={mainRootNav} />
+          <Stack.Screen
+            name="Home"
+            component={mainRootNav}
+            options={{ headerShown: false }}
+          />
         ) : (
-          <Stack.Screen name="Sign In" component={SignIn} />
+          <Stack.Screen
+            name="Sign In"
+            component={SignIn}
+            options={{ headerShown: false }}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+// reference for how i hid the header: https://docs.expo.dev/router/advanced/stack/

@@ -18,13 +18,13 @@ export default function SignIn() {
   async function signUpHandler() {
     try {
       // tells firebase to create a user with these details
-      const userInfo = await createUserWithEmailAndPassword(
+      const response = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
       );
       // pops up if success
-      console.log(userInfo);
+      console.log(response);
       alert("Success." + email + " has been signed up.");
     } catch (error) {
       // in the case that an error occurs so that the system doesn't crash
@@ -37,9 +37,9 @@ export default function SignIn() {
   async function logInHandler() {
     try {
       // tells firebase to log in a user with these details
-      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      const response = await signInWithEmailAndPassword(auth, email, password);
       // pops up if success
-      console.log(userInfo);
+      console.log(response);
       alert("Welcome back, " + email + ".");
     } catch (error) {
       // in the case that an error occurs so that the system doesn't crash
@@ -93,4 +93,3 @@ export default function SignIn() {
     </View>
   );
 }
-// buttons above are native, if we wanna stylize them we should change them to pressables i think
