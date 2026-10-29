@@ -47,6 +47,47 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#d3e7c0",
   },
+  createInputContainer: {
+    width: "80%",
+    backgroundColor: "#D9D9D9",
+    padding: 20,
+    borderRadius: 25,
+    gap: 10,
+    marginBottom: 25,
+  },
+  createInputHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  createInput: {
+    color: "#949494",
+    backgroundColor: "#EFEFEF",
+    borderRadius: 10,
+    paddingLeft: 12,
+  },
+  datePickerToday: {
+    backgroundColor: "transparent"
+  },
+  datePickerSelected: {
+    backgroundColor: "#77a171",
+    borderRadius: 10,
+  },
+  datePickerSelectedLabel: {
+    color: "white"
+  },
+  datePickerRangeFill: {
+    backgroundColor: "#9dc29856"
+  },
+  datePickerRangeFillStart: {
+    borderTopLeftRadius: 10, 
+    borderBottomLeftRadius: 10,
+    backgroundColor: "#9dc29856"
+  },
+  datePickerRangeFillEnd: {
+    borderTopRightRadius: 10, 
+    borderBottomRightRadius: 10,
+    backgroundColor: "#9dc29856"
+  }
 });
 
 export default styles;
