@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  scrollContainer: {
+    flexGrow: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   title: {
     fontSize: 24,
     marginTop: 200,
@@ -87,7 +93,32 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10, 
     borderBottomRightRadius: 10,
     backgroundColor: "#9dc29856"
-  }
+  },
+  createUploadImageContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+  },
+  testingButton: {
+    backgroundColor: "white",
+    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 20,
+    alignItems: "center"
+  },
+  createUploadButtons: {
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: 15
+  },
+  createUploadPreviewImage: {
+    backgroundColor: "#EFEFEF",
+    justifyContent: "center",
+    padding: 10,
+    height: 150,
+    borderRadius: 10
+  },
 });
 
 export default styles;
