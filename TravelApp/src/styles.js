@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 50,
   },
   title: {
     fontSize: 24,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   createInput: {
-    color: "#949494",
+    flex: 1,
     backgroundColor: "#EFEFEF",
     borderRadius: 10,
     paddingLeft: 12,
@@ -119,6 +120,21 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 10
   },
+  createCategoriesInput: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 15,
+    // marginBottom: 10
+  }, 
+  createCategoriesDisplay: {
+    flexDirection: "row",
+    backgroundColor: "#EFEFEF",
+    padding: 10,
+    borderRadius: 10,
+    // will fix spacing later
+    justifyContent: "space-between"
+  }
+
 });
 
 export default styles;

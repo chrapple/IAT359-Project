@@ -1,8 +1,9 @@
-import { Text, TextInput, View, ScrollView, Pressable, Image } from "react-native";
+import { Text, TextInput, View, ScrollView, Pressable, Image, Button, FlatList } from "react-native";
 import { useState } from "react";
 import DatePicker from "react-native-ui-datepicker";
 import * as ImagePicker from "expo-image-picker";
 import styles from "../styles";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Create() {
 
@@ -12,6 +13,8 @@ export default function Create() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [image, setImage] = useState(null);
+  const [category, setCategory] = useState("");
+  const [allCategories, setAllCategories] = useState([]);
 
   // function for the user to pick an image from their camera roll
   async function pickImage() {
@@ -49,8 +52,27 @@ export default function Create() {
     }
   };
 
+  // adds the category the user typed in into the allCategories array to then be displayed
+  function addCategory() {
+    if (category.trim()) {
+      setAllCategories([...allCategories, {id: Date.now().toString(), name: category}]);
+      setCategory("");
+    }
+  }
+
+  // function to delete a category from the allCategories array if user presses delete on the specific category element
+  function deleteCategory(id) {
+    setAllCategories(allCategories.filter((category) => category.id !== id));
+  }
+
+  const navigation = useNavigation();
+
   return (
     <ScrollView contentContainerStyle = {styles.scrollContainer}>
+      {/* same tutorial as hiding bottom nav: https://www.youtube.com/watch?v=oqPrCiZyUEs */}
+      {/* going back to last page (doesn't work tho...): https://reactnavigation.org/docs/navigating/ */}
+      <Button title = "Back" onPress = {() => navigation.goBack()}> </Button>
+
       {/* travel journal name input */}
       <View style = {styles.createInputContainer}>
         <Text style = {styles.createInputHeader}>Travel Journal Name</Text>
@@ -121,6 +143,58 @@ export default function Create() {
             ) : (<Text>Upload an Image!</Text>)}
           </View>
         </View>
+      </View>
+
+      {/* creating categories */}
+      <View style = {styles.createInputContainer}>
+        <Text style = {styles.createInputHeader}>Add Categories</Text>
+
+        {/* section for the input and add button */}
+        <View style = {styles.createCategoriesInput}>
+          <TextInput
+            style = {styles.createInput}
+            value = {category}
+            onChangeText = {setCategory}
+            placeholder = "Category Name"
+          />
+          <Pressable style = {styles.testingButton} onPress = {addCategory}>
+            <Text>Add</Text>
+          </Pressable>
+        </View>
+
+        {/* section for the categories */}
+        {/* use map to make each of the category in allCategories display its own element with edit and delete options */}
+        {/* can't use flatlist cause there was a problem with also using a scrollview, maybe ask helmine for advice? or can just stick with simple map method cause it works */}
+
+        {/* <FlatList>
+          data = {allCategories}
+          keyExtractor = {(item) => item.id}
+          renderItem = {({item}) => (
+            <View style = {styles.    createCategoriesDisplay}>
+              <Text>{category}</Text>
+              <Pressable>
+                <Text>Edit</Text>
+              </Pressable>
+              <Pressable>
+                <Text>Delete</Text>
+              </Pressable>
+            </View>
+          )}
+        </FlatList> */}
+
+
+        {allCategories.map((category) => (
+          <View style = {styles.createCategoriesDisplay} key = {category.id}>
+            <Text>{category.name}</Text>
+            {/* IMPLEMENT EDIT */}
+            <Pressable>
+              <Text>Edit</Text>
+            </Pressable>
+            <Pressable onPress = {() => deleteCategory(category.id)}>
+              <Text>Delete</Text>
+            </Pressable>
+          </View>
+        ))}
       </View>
     </ScrollView>
   );

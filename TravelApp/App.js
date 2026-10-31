@@ -27,7 +27,8 @@ export default function App() {
     return (
       <BottomTab.Navigator initialRouteName="Home">
         <BottomTab.Screen name="Home" component={HomeScreen} />
-        <BottomTab.Screen name="Create" component={Create} />
+        {/* tutorial to hide nav bar when on create page: https://www.youtube.com/watch?v=oqPrCiZyUEs */}
+        <BottomTab.Screen name="Create" component={Create} options = {{tabBarStyle: {display: "none"}}} />
         <BottomTab.Screen name="Journals" component={Journals} />
         <BottomTab.Screen name="Settings" component={Settings} />
       </BottomTab.Navigator>
