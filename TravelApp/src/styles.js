@@ -54,6 +54,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#d3e7c0",
   },
+  signOutButton: {
+    marginTop: 50,
+    padding: 15,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 50,
+    backgroundColor: "#ff0800",
+  },
   createInputContainer: {
     width: "80%",
     backgroundColor: "#D9D9D9",
@@ -86,12 +94,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#9dc29856"
   },
   datePickerRangeFillStart: {
-    borderTopLeftRadius: 10, 
+    borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     backgroundColor: "#9dc29856"
   },
   datePickerRangeFillEnd: {
-    borderTopRightRadius: 10, 
+    borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: "#9dc29856"
   },
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 15,
     // marginBottom: 10
-  }, 
+  },
   createCategoriesDisplay: {
     flexDirection: "row",
     backgroundColor: "#EFEFEF",
