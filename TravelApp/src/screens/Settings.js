@@ -12,6 +12,7 @@ export default function Settings() {
       alert("Signed out successfully");
     }
     catch (e) {
+      // Alerts if sign-out fails
       Alert.alert("Sign Out Error", e.message);
     }
   };
