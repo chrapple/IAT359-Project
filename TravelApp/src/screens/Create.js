@@ -1,9 +1,11 @@
-import { Text, TextInput, View, ScrollView, Pressable, Image, Button, FlatList } from "react-native";
+import { Text, TextInput, View, ScrollView, Pressable, Image, Button, FlatList, Alert } from "react-native";
 import { useState } from "react";
 import DatePicker from "react-native-ui-datepicker";
 import * as ImagePicker from "expo-image-picker";
 import styles from "../styles";
 import { useNavigation } from "@react-navigation/native";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 export default function Create() {
 
@@ -63,6 +65,36 @@ export default function Create() {
   // function to delete a category from the allCategories array if user presses delete on the specific category element
   function deleteCategory(id) {
     setAllCategories(allCategories.filter((category) => category.id !== id));
+  }
+
+  //function used to clear all the fields back to initial state after uploading the journal to the cloud storage
+  function clearFields() {
+    setJournalName("");
+    setLocation(null);
+    setStartDate(null);
+    setEndDate(null);
+    setImage(null);
+    setCategory("");
+    setAllCategories([]);
+  }
+
+  async function createJournal() {
+    try {
+      const docRef = await addDoc(collection(db, "journals"), {
+        journalName: journalName,
+        location: location,
+        startDate: startDate,
+        endDate: endDate,
+        // TO DO:
+        // COVER IMAGE,
+        allCategories: allCategories
+      });
+      console.log("Document written with ID: ", docRef.Id);
+      clearFields();
+      Alert.alert(`Your "${journalName}" journal has been created!`);
+    } catch (e) {
+      console.error("Error adding document: ", e)
+    }
   }
 
   const navigation = useNavigation();
@@ -195,7 +227,11 @@ export default function Create() {
             </Pressable>
           </View>
         ))}
+
       </View>
+      <Pressable style = {styles.createJournalButton} onPress = {createJournal}>
+        <Text>Create Journal</Text>
+      </Pressable>
     </ScrollView>
   );
 }

@@ -141,6 +141,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     // will fix spacing later
     justifyContent: "space-between"
+  },
+  createJournalButton: {
+    backgroundColor: "#D9D9D9",
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 20,
+    marginBottom: 20,
   }
 
 });
