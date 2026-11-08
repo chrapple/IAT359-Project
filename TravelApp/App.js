@@ -13,6 +13,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import Create from "./src/screens/Create";
 import Journals from "./src/screens/Journals";
 import Settings from "./src/screens/Settings";
+import Entry from "./src/screens/Entry";
 
 export default function App() {
   // create navigators
@@ -28,13 +29,26 @@ export default function App() {
       <BottomTab.Navigator initialRouteName="Home">
         <BottomTab.Screen name="Home" component={HomeScreen} />
         {/* tutorial to hide nav bar when on create page: https://www.youtube.com/watch?v=oqPrCiZyUEs */}
-        <BottomTab.Screen name="Create" component={Create} options = {{tabBarStyle: {display: "none"}}} />
-        <BottomTab.Screen name="Journals" component={Journals} />
+        <BottomTab.Screen name="Create" component={Create} options={{ tabBarStyle: { display: "none" } }} />
+
+        {/* changed component to use the journal route stack */}
+        <BottomTab.Screen name="Journals" component={JournalStackNav} />
         <BottomTab.Screen name="Settings" component={Settings} />
       </BottomTab.Navigator>
     );
   }
+
   // additional stack is needed for the journal route, create it below this comment
+  function JournalStackNav() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Journals" component={Journals}
+          options={{ headerShown: false }} />
+        <Stack.Screen name="Entry" component={Entry}
+          options={{ headerShown: false }} />
+      </Stack.Navigator>
+    );
+  }
 
   useEffect(() => {
     // onAuthStateChanged from firebase sets up a listener
