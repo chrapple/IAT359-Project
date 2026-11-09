@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   createUploadImageContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-
+    alignItems: "center"
   },
   testingButton: {
     backgroundColor: "white",
@@ -124,9 +124,14 @@ const styles = StyleSheet.create({
   createUploadPreviewImage: {
     backgroundColor: "#EFEFEF",
     justifyContent: "center",
-    padding: 10,
+    alignItems: "center",
     height: 150,
-    borderRadius: 10
+    width: 130,
+    borderRadius: 10,
+  },
+  previewImage: {
+    height: "100%",
+    width: "100%",
   },
   createCategoriesInput: {
     flexDirection: "row",

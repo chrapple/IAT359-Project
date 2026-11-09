@@ -171,7 +171,7 @@ export default function Create() {
           {/* checks if there's an image, if not it will show text, otherwise it will display the image */}
           <View style = {styles.createUploadPreviewImage}>
             {image ? (
-              <Image source = {{uri: image}} />
+              <Image source = {{uri: image}} style = {styles.previewImage} />
             ) : (<Text>Upload an Image!</Text>)}
           </View>
         </View>
@@ -219,9 +219,9 @@ export default function Create() {
           <View style = {styles.createCategoriesDisplay} key = {category.id}>
             <Text>{category.name}</Text>
             {/* IMPLEMENT EDIT */}
-            <Pressable>
+            {/* <Pressable>
               <Text>Edit</Text>
-            </Pressable>
+            </Pressable> */}
             <Pressable onPress = {() => deleteCategory(category.id)}>
               <Text>Delete</Text>
             </Pressable>
