@@ -88,16 +88,19 @@ export default function Entry({ navigation, route }) {
 
   async function getLocationFlag() {
     try {
+      // calling the getInitLocation to get location
       const location = await getInitLocation();
 
+      // use revese geocoding to retrieve the information on the inital location from the locations long and lat 
       const country = await Location.reverseGeocodeAsync({
         latitude: location.latitude,
         longitude: location.longitude,
       });
 
       // console.log(country);
+      // getting the country name to then pass into the api call
       const countryName = country[0].country;
-      console.log(countryName);
+      // console.log(countryName);
 
       // calling https://restcountries.com/ api to get the journal location country flag to display
       const response = await fetch (`https://api.restcountries.com/countries/v5?q=${countryName}`,
@@ -114,7 +117,7 @@ export default function Entry({ navigation, route }) {
     }
   }
 
-  // get the location when this component mounts
+  // get the location and country flag when this component mounts
   useEffect(() => {
     getInitLocation();
     getLocationFlag();
