@@ -214,6 +214,10 @@ const styles = StyleSheet.create({
     marginVertical: 40,
     borderRadius: 40,
   },
+  entryButtons: {
+    flexDirection: "row",
+    gap: 25
+  }
 });
 
 export default styles;
