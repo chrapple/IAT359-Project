@@ -208,6 +208,14 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 50,
   },
+  journalSubtitle: {
+    fontSize: 24,
+    marginBottom: 0,
+  },
+  journalCategories: {
+    marginBottom: 25,
+    fontStyle: 'italic',
+  },
   journalMap: {
     width: "100%",
     height: "40%",
