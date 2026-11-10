@@ -53,7 +53,7 @@ export default function SignIn() {
   // ui
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>App Name</Text>
+      <Text style={styles.title}>Coddiwomple</Text>
       <Text>Sign In/Log In</Text>
 
       <View style={styles.signinContainer}>
