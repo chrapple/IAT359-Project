@@ -50,7 +50,10 @@ export default function Entry({ navigation, route }) {
   }, []);
 
   // displaying categories -- creates new array with just names because allCategories includes id and some entries dont have categories at all.
-  const categories = item.allCategories.length > 0 ? item.allCategories.map((entry) => entry.name) : null;
+  const categories = item.allCategories.length > 0 ? item.allCategories.map((entry) => ({
+    id: entry.id,
+    name: entry.name
+  })) : null;
   // console.log(categories);
 
   return (
@@ -94,7 +97,7 @@ export default function Entry({ navigation, route }) {
         <View style = {styles.categoryGrid}>
           {categories.map((category) => (
             <View key = {category.id} style = {styles.categoryFolder}>
-              <Text>{category}</Text>
+              <Text>{category.name}</Text>
             </View>
           ))}
         </View>
