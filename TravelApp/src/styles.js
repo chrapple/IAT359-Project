@@ -202,11 +202,19 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   journalTitle: {
-    fontSize: 33,
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontSize: 48,
+    textAlign: 'center',
+    // fontWeight: 'bold',
+    marginBottom: 0,
+    marginTop: 25,
+  },
+  journalSubtitle: {
+    fontSize: 24,
+    marginBottom: 0,
+  },
+  journalCategories: {
     marginBottom: 25,
-    marginTop: 50,
+    fontStyle: 'italic',
   },
   journalMap: {
     width: "100%",
