@@ -1,21 +1,20 @@
 import { Text, View, Pressable, Alert } from "react-native";
 import styles from "../styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { signOut } from "firebase/auth";
 import { firebase_auth } from "../firebaseConfig";
 
 export default function Settings() {
-
   // Sign out uses firebase native signOut() function
   async function signOutHandler() {
     try {
       await signOut(firebase_auth);
       alert("Signed out successfully");
-    }
-    catch (e) {
+    } catch (e) {
       // Alerts if sign-out fails
       Alert.alert("Sign Out Error", e.message);
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -23,7 +22,7 @@ export default function Settings() {
 
       {/* Sign Out Button */}
       <Pressable style={styles.signOutButton} onPress={signOutHandler}>
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>Sign Out</Text>
+        <Text style={{ color: "white", fontWeight: "bold" }}>Sign Out</Text>
       </Pressable>
     </View>
   );

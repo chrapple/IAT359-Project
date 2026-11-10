@@ -2,12 +2,45 @@ import { Text, View, FlatList, Pressable, Button, ScrollView } from "react-nativ
 import styles from "../styles";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect, useRef } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 export default function Entry({ navigation, route }) {
   const { item } = route.params;
+
+  // documentation: https://react-native-async-storage.github.io/2.0/Usage/
+  const saveRecentlyViewed = async (item) => {
+    try {
+      // get whatever is already in the existing storage
+      const existingHistory = await AsyncStorage.getItem("journal");
+
+      let recentHistory = [];
+
+      // if there is existing history,
+      // go through and parse what already exists back to a usable format (because it is stored as a string in async storage)
+      // assigned the new parsed items into the current history array
+      if (existingHistory) {
+        const parsed = JSON.parse(existingHistory);
+        recentHistory = parsed;
+      }
+
+      // filter the history to only contain items that are not this item's id
+      recentHistory = recentHistory.filter(
+        (historyItem) => historyItem.id !== item.id,
+      );
+
+      // add new item to the front of the list
+      // stringify it to save into async storage
+      recentHistory.unshift(item);
+      await AsyncStorage.setItem("journal", JSON.stringify(recentHistory));
+      console.log(recentHistory);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [journalLoc, setJournalLoc] = useState(null);
 
   async function getInitLocation() {
@@ -25,7 +58,7 @@ export default function Entry({ navigation, route }) {
           latitudeDelta: 0.2,
           longitudeDelta: 0.2,
         };
-        console.log(foundLocation);
+        console.log("foundLocation:", foundLocation);
         // set the location of this journal entry to the coordinates above
         setJournalLoc(foundLocation);
       }
@@ -33,6 +66,11 @@ export default function Entry({ navigation, route }) {
       console.log(error);
     }
   }
+  useEffect(() => {
+    if (item) {
+      saveRecentlyViewed(item);
+    }
+  }, []);
 
   async function deleteJournal(id) {
     // deleting a document from the collection in firebase: https://firebase.google.com/docs/firestore/manage-data/delete-data

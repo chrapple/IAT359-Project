@@ -64,6 +64,21 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#ff0800",
   },
+  // home screen unique styles
+  homeScreenTitle: {
+    marginTop: 70,
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  recentlyViewedList: {
+    backgroundColor: "#d3e7c0",
+    paddingVertical: 50,
+    paddingHorizontal: 100,
+    alignItems: "center",
+    borderRadius: 20,
+    marginTop: 30,
+    boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.04)",
+  },
   // create journal styles
   createInputContainer: {
     width: "80%",
