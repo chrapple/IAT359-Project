@@ -53,7 +53,7 @@ export default function SignIn() {
   // ui
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Coddiwomple</Text>
+      <Text style={styles.title}>coddiwomple</Text>
       <Text>Sign In/Log In</Text>
 
       <View style={styles.signinContainer}>
