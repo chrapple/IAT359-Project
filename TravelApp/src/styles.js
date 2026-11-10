@@ -193,8 +193,9 @@ const styles = StyleSheet.create({
   },
   journalMap: {
     width: "100%",
-    height: "55%",
-    marginTop: 10,
+    height: "40%",
+    marginVertical: 40,
+    borderRadius: 40,
   },
 });
 
