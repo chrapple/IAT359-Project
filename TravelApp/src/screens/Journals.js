@@ -5,7 +5,6 @@ import { getDocs, collection } from "firebase/firestore";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { db } from "../firebaseConfig";
 
-
 export default function Journal() {
   //array to hold all of the journals we get from firebase
   const [allJournals, setAllJournals] = useState([]);
@@ -21,7 +20,7 @@ export default function Journal() {
         console.log(doc.id, "=>", doc.data());
         journals.push({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         });
       });
       setAllJournals(journals);
@@ -43,11 +42,13 @@ export default function Journal() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View>
-
             {/* Encased list items onto pressable buttons */}
             <Pressable
-              style={styles.createJournalButton}
-              onPress={() => { navigation.navigate("Entry", { item: item }) }}>
+              style={styles.journalList}
+              onPress={() => {
+                navigation.navigate("Entry", { item: item });
+              }}
+            >
               <Text>{item.journalName}</Text>
             </Pressable>
           </View>

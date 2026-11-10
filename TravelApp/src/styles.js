@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 200,
   },
+  // authentication screens styles
   input: {
     height: 40,
     width: "70%",
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "#ff0800",
   },
+  // create journal styles
   createInputContainer: {
     width: "80%",
     backgroundColor: "#D9D9D9",
@@ -80,34 +82,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFEFEF",
     borderRadius: 10,
     paddingLeft: 12,
+    paddingVertical: 15,
   },
   datePickerToday: {
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   datePickerSelected: {
     backgroundColor: "#77a171",
     borderRadius: 10,
   },
   datePickerSelectedLabel: {
-    color: "white"
+    color: "white",
   },
   datePickerRangeFill: {
-    backgroundColor: "#9dc29856"
+    backgroundColor: "#9dc29856",
   },
   datePickerRangeFillStart: {
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    backgroundColor: "#9dc29856"
+    backgroundColor: "#9dc29856",
   },
   datePickerRangeFillEnd: {
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: "#9dc29856"
+    backgroundColor: "#9dc29856",
   },
   createUploadImageContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   testingButton: {
     backgroundColor: "white",
@@ -115,12 +118,12 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   createUploadButtons: {
     flexDirection: "column",
     justifyContent: "center",
-    gap: 15
+    gap: 15,
   },
   createUploadPreviewImage: {
     backgroundColor: "#EFEFEF",
@@ -146,17 +149,25 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     // will fix spacing later
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   createJournalButton: {
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#d3e7c0",
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 20,
-    marginBottom: 20,
+    marginBottom: 70,
   },
-
+  // journals display page
+  journalList: {
+    backgroundColor: "#d3e7c0",
+    paddingVertical: 50,
+    paddingHorizontal: 100,
+    alignItems: "center",
+    borderRadius: 20,
+    marginBottom: 30,
+  },
   // Journal Entry pages
   journalContainer: {
     flex: 1,
@@ -172,15 +183,19 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 20,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   journalTitle: {
     fontSize: 48,
     // fontWeight: 'bold',
     marginBottom: 25,
     marginTop: 25,
-  }
-
+  },
+  journalMap: {
+    width: "100%",
+    height: "55%",
+    marginTop: 10,
+  },
 });
 
 export default styles;
