@@ -55,7 +55,7 @@ export default function Entry({ navigation, route }) {
 
   return (
     // <ScrollView style={styles.journalContainer}>
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <Pressable
         style={styles.journalBackButton}
         onPress={() => navigation.goBack()}
@@ -64,25 +64,43 @@ export default function Entry({ navigation, route }) {
       </Pressable>
 
       <Text style={styles.journalTitle}>{item.journalName}</Text>
-      <Text style={styles.journalSubtitle}>{item.location}</Text>
-      {/* Adding text between array string items: https://dev.to/ofthewildfire/javascript-string-manipulation-how-to-use-split-reverse-and-join-4ojf */}
-      {categories ? <Text style={styles.journalCategories}>{categories.join(", ")}</Text> : <Text style={styles.journalCategories}>No categories</Text>}
 
-      {/* converting from a firebase timestamp into a js date object: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp */}
-      {/* converting from a js date object into a readable string to display in text: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/ */}
-      <Text>
-        {item.startDate?.toDate().toLocaleDateString()} to{" "}
-        {item.endDate?.toDate().toLocaleDateString()}
-      </Text>
+      {/* TO DO styling */}
+      <View>
+        <Text style={styles.journalSubtitle}>{item.location}</Text>
+        {/* converting from a firebase timestamp into a js date object: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp */}
+        {/* converting from a js date object into a readable string to display in text: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/ */}
+        <Text>
+          {item.startDate?.toDate().toLocaleDateString()} to{" "}
+          {item.endDate?.toDate().toLocaleDateString()}
+        </Text>
+      </View>
 
       <View style = {styles.entryButtons}>
         <Button title = "Location" />
         <Button title = "Category" />
         <Button title = "Edit" />
       </View>
+
       {/*create the map view, pass the location found in the async function into the initial region*/}
       <MapView style={styles.journalMap} initialRegion={journalLoc} />
-      <Text></Text>
+      
+      {/* Adding text between array string items: https://dev.to/ofthewildfire/javascript-string-manipulation-how-to-use-split-reverse-and-join-4ojf */}
+      {/* {categories ? <Text style={styles.journalCategories}>{categories.join(", ")}</Text> : <Text style={styles.journalCategories}>No categories</Text>} */}
+      
+      <View>
+        <Text>Categories</Text>
+        {categories ? 
+        <View style = {styles.categoryGrid}>
+          {categories.map((category) => (
+            <View key = {category.id} style = {styles.categoryFolder}>
+              <Text>{category}</Text>
+            </View>
+          ))}
+        </View>
+        : 
+        <Text style={styles.journalCategories}>No categories</Text>}
+      </View>
 
       {/* journal delete button */}
       <Pressable onPress = {() => deleteJournal(item.id)} style = {styles.signOutButton}>
