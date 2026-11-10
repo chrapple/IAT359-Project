@@ -24,7 +24,7 @@ export default function App() {
 
   // function for whole bottom tab after sign in
   // protected navs: https://docs.expo.dev/router/advanced/protected/
-  function mainRootNav() {
+  function MainRootNav() {
     return (
       <BottomTab.Navigator initialRouteName="Home">
         <BottomTab.Screen name="Home" component={HomeScreen} />
@@ -79,7 +79,7 @@ export default function App() {
         {user ? (
           <Stack.Screen
             name="Home"
-            component={mainRootNav}
+            component={MainRootNav}
             options={{ headerShown: false }}
           />
         ) : (
