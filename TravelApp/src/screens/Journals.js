@@ -1,7 +1,7 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import styles from "../styles";
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, onSnapshot } from "firebase/firestore";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { db } from "../firebaseConfig";
 
@@ -12,18 +12,26 @@ export default function Journal() {
 
   async function getJournals() {
     try {
-      const querySnapshot = await getDocs(collection(db, "journals"));
+      // this only listens "once" so it gets the journals from the database when called
+      // const querySnapshot = await getDocs(collection(db, "journals"));
+      
+      // instead we're going to use onSnapshot which allows for our real time updates to be reflected: https://firebase.google.com/docs/firestore/query-data/listen#web
+      const unsub = onSnapshot(collection(db, "journals"), (querySnapshot) => {
+        let journals = [];
 
-      let journals = [];
-
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
-        journals.push({
-          id: doc.id,
-          ...doc.data(),
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, "=>", doc.data());
+          journals.push({
+            id: doc.id,
+            ...doc.data(),
+          });
         });
+        setAllJournals(journals);
       });
-      setAllJournals(journals);
+
+      // return unsub to stop listening for changes when not on the page (saving phone resources)
+      return unsub;
+
     } catch (e) {
       console.error("Error retrieveing journals: ", e);
     }
