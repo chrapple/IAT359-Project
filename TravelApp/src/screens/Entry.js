@@ -1,4 +1,4 @@
-import { Text, View, FlatList, Pressable, Button, ScrollView } from "react-native";
+import { Text, View, FlatList, Pressable, Button, ScrollView, Image } from "react-native";
 import styles from "../styles";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -42,13 +42,14 @@ export default function Entry({ navigation, route }) {
   };
 
   const [journalLoc, setJournalLoc] = useState(null);
+  const [countryFlag, setCountryFlag] = useState(null);
 
   async function getInitLocation() {
     try {
       // source documentation: https://docs.expo.dev/versions/latest/sdk/location/#locationgeocodeasyncaddress
       // attempts to find most suitable coordinates for location field in the item
       const locationToFind = await Location.geocodeAsync(item.location);
-      console.log(locationToFind);
+      // console.log(locationToFind);
       // if the coordinates have been found and exist,
       // format the coordinates for longitude and latitude of the first index (best fit) find
       if (locationToFind.length > 0) {
@@ -58,9 +59,12 @@ export default function Entry({ navigation, route }) {
           latitudeDelta: 0.2,
           longitudeDelta: 0.2,
         };
-        console.log("foundLocation:", foundLocation);
+        // console.log(foundLocation);
         // set the location of this journal entry to the coordinates above
         setJournalLoc(foundLocation);
+
+        // returning the foundLocation to use in the getFlag function
+        return foundLocation;
       }
     } catch (error) {
       console.log(error);
@@ -82,9 +86,38 @@ export default function Entry({ navigation, route }) {
     }
   }
 
+  async function getLocationFlag() {
+    try {
+      const location = await getInitLocation();
+
+      const country = await Location.reverseGeocodeAsync({
+        latitude: location.latitude,
+        longitude: location.longitude,
+      });
+
+      // console.log(country);
+      const countryName = country[0].country;
+      console.log(countryName);
+
+      // calling https://restcountries.com/ api to get the journal location country flag to display
+      const response = await fetch (`https://api.restcountries.com/countries/v5?q=${countryName}`,
+        { headers: { 'Authorization': 'Bearer rc_live_c2d46a4478814dba9e138e5f47049045' } });
+      const data = await response.json();
+
+      // console.log(data.data.objects[0]);
+
+      // setting the country flag as the associated png from fetch
+      // properties of the api fetch can be found here: https://restcountries.com/
+      setCountryFlag(data.data.objects[0].flag.url_png);
+    } catch (e) {
+      console.log("Error in fetching the country flag: ", e);
+    }
+  }
+
   // get the location when this component mounts
   useEffect(() => {
     getInitLocation();
+    getLocationFlag();
   }, []);
 
   // displaying categories -- creates new array with just names because allCategories includes id and some entries dont have categories at all.
@@ -108,6 +141,7 @@ export default function Entry({ navigation, route }) {
 
       {/* TO DO styling */}
       <View>
+        <Image source={{uri: countryFlag}} style = {styles.flagImage}/>
         <Text style={styles.journalSubtitle}>{item.location}</Text>
         {/* converting from a firebase timestamp into a js date object: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp */}
         {/* converting from a js date object into a readable string to display in text: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/ */}
