@@ -230,7 +230,7 @@ export default function Create() {
           )}
         </FlatList> */}
 
-        {allCategories.map((category) => (
+        {allCategories. map((category) => (
           <View style={styles.createCategoriesDisplay} key={category.id}>
             <Text>{category.name}</Text>
             {/* IMPLEMENT EDIT */}

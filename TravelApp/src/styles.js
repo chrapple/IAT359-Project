@@ -223,12 +223,36 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 50,
   },
+  journalSubtitle: {
+    fontSize: 24,
+    marginBottom: 0,
+  },
+  journalCategories: {
+    marginBottom: 25,
+    fontStyle: 'italic',
+  },
   journalMap: {
-    width: "100%",
-    height: "40%",
+    width: "85%",
+    height: 300,
     marginVertical: 40,
     borderRadius: 40,
   },
+  entryButtons: {
+    flexDirection: "row",
+    gap: 25
+  },
+  categoryGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 20
+  },
+  categoryFolder: {
+    width: 180,
+    backgroundColor: "#D9D9D9",
+    padding: 50,
+    borderRadius: 10,
+    alignItems: "center",
+  }
 });
 
 export default styles;
