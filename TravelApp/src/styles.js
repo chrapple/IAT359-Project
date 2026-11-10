@@ -73,6 +73,15 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 25,
   },
+  createBackButton: {
+    backgroundColor: "#D9D9D9",
+    padding: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignSelf: "flex-start",
+    marginLeft: 40,
+    marginBottom: 50,
+  },
   createInputHeader: {
     fontSize: 20,
     fontWeight: "bold",
@@ -153,11 +162,12 @@ const styles = StyleSheet.create({
   },
   createJournalButton: {
     backgroundColor: "#d3e7c0",
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: "20%",
+    paddingVertical: 20,
     borderRadius: 20,
-    marginBottom: 70,
+    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 100,
   },
   // journals display page
   journalList: {
@@ -167,6 +177,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
     marginBottom: 30,
+    boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.04)",
+  },
+  journalListTitles: {
+    fontSize: 15,
+    textTransform: "uppercase",
+    fontWeight: "bold",
   },
   // Journal Entry pages
   journalContainer: {
@@ -186,10 +202,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   journalTitle: {
-    fontSize: 48,
-    // fontWeight: 'bold',
+    fontSize: 33,
+    fontWeight: "bold",
+    textTransform: "uppercase",
     marginBottom: 25,
-    marginTop: 25,
+    marginTop: 50,
   },
   journalMap: {
     width: "100%",
