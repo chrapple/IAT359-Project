@@ -187,9 +187,18 @@ const styles = StyleSheet.create({
   },
   journalTitle: {
     fontSize: 48,
+    textAlign: 'center',
     // fontWeight: 'bold',
-    marginBottom: 25,
+    marginBottom: 0,
     marginTop: 25,
+  },
+  journalSubtitle: {
+    fontSize: 24,
+    marginBottom: 0,
+  },
+  journalCategories: {
+    marginBottom: 25,
+    fontStyle: 'italic',
   },
   journalMap: {
     width: "100%",

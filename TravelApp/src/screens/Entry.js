@@ -31,10 +31,15 @@ export default function Entry({ navigation, route }) {
       console.log(error);
     }
   }
+
   // get the location when this component mounts
   useEffect(() => {
     getInitLocation();
   }, []);
+
+  // displaying categories -- creates new array with just names because allCategories includes id and some entries dont have categories at all.
+  const categories = item.allCategories.length > 0 ? item.allCategories.map((entry) => entry.name) : null;
+  // console.log(categories);
 
   return (
     <View style={styles.journalContainer}>
@@ -46,16 +51,18 @@ export default function Entry({ navigation, route }) {
       </Pressable>
 
       <Text style={styles.journalTitle}>{item.journalName}</Text>
+      <Text style={styles.journalSubtitle}>{item.location}</Text>
+      {/* Adding text between array string items: https://dev.to/ofthewildfire/javascript-string-manipulation-how-to-use-split-reverse-and-join-4ojf */}
+      {categories ? <Text style={styles.journalCategories}>{categories.join(", ")}</Text> : <Text style={styles.journalCategories}>No categories</Text>}
 
       {/* converting from a firebase timestamp into a js date object: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp */}
       {/* converting from a js date object into a readable string to display in text: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/ */}
       <Text>
-        {item.startDate?.toDate().toLocaleDateString()} to{" "}
+        {item.startDate?.toDate().toLocaleDateString()} to {" "}
         {item.endDate?.toDate().toLocaleDateString()}
       </Text>
       {/*create the map view, pass the location found in the async function into the initial region*/}
       <MapView style={styles.journalMap} initialRegion={journalLoc} />
-      <Text></Text>
     </View>
   );
 }
