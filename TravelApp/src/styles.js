@@ -237,6 +237,10 @@ const styles = StyleSheet.create({
     padding: 50,
     borderRadius: 10,
     alignItems: "center",
+  },
+  flagImage: {
+    width: 50,
+    height: 30,
   }
 });
 
