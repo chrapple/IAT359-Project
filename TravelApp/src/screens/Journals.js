@@ -57,7 +57,7 @@ export default function Journal() {
                 navigation.navigate("Entry", { item: item });
               }}
             >
-              <Text>{item.journalName}</Text>
+              <Text style={styles.journalListTitles}>{item.journalName}</Text>
             </Pressable>
           </View>
         )}

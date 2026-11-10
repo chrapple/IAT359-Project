@@ -117,13 +117,15 @@ export default function Create() {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {/* same tutorial as hiding bottom nav: https://www.youtube.com/watch?v=oqPrCiZyUEs */}
       {/* going back to last page (doesn't work tho...): https://reactnavigation.org/docs/navigating/ */}
-      <Button title="Back" onPress={() => navigation.goBack()}>
-        {" "}
-      </Button>
-
+      <Pressable
+        style={styles.createBackButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Text>Back</Text>
+      </Pressable>
       {/* travel journal name input */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Travel Journal Name</Text>
+        <Text style={styles.createInputHeader}>Travel Journal Name*</Text>
         <TextInput
           style={styles.createInput}
           value={journalName}
@@ -131,11 +133,10 @@ export default function Create() {
           placeholder="e.g., Rome 2025"
         />
       </View>
-
       {/* select location input */}
       {/* probably use an api so its like an autocomplete when users are typing, makes sure its a real place + extra api! */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Select Your Location</Text>
+        <Text style={styles.createInputHeader}>Select Your Location*</Text>
         <TextInput
           style={styles.createInput}
           value={location}
@@ -143,12 +144,11 @@ export default function Create() {
           placeholder="Rome, Italy"
         />
       </View>
-
       {/* date input */}
       {/* rough looking, will fix later just seeing functionality */}
       {/* react native calendar so we can have data range pick for users: https://withfra.me/react-native-tutorials/how-to-use-date-picker-in-react-native, https://github.com/farhoudshapouran/react-native-ui-datepicker? */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Dates</Text>
+        <Text style={styles.createInputHeader}>Dates*</Text>
         <DatePicker
           mode="range"
           startDate={startDate}
@@ -170,7 +170,6 @@ export default function Create() {
         <Text>Start: {String(startDate)}</Text>
         <Text>End: {String(endDate)}</Text>
       </View>
-
       {/* uploading or taking pictures: https://docs.expo.dev/versions/latest/sdk/imagepicker/ */}
       <View style={styles.createInputContainer}>
         <Text style={styles.createInputHeader}>Upload Your Cover</Text>
@@ -194,7 +193,6 @@ export default function Create() {
           </View>
         </View>
       </View>
-
       {/* creating categories */}
       <View style={styles.createInputContainer}>
         <Text style={styles.createInputHeader}>Add Categories</Text>
@@ -245,7 +243,22 @@ export default function Create() {
           </View>
         ))}
       </View>
-      <Pressable style={styles.createJournalButton} onPress={createJournal}>
+
+      <Pressable
+        style={styles.createJournalButton}
+        onPress={() => {
+          if (
+            journalName !== null &&
+            location !== null &&
+            startDate !== null &&
+            endDate !== null
+          ) {
+            createJournal();
+          } else {
+            alert("One or more required fields is empty");
+          }
+        }}
+      >
         <Text>Create Journal</Text>
       </Pressable>
     </ScrollView>
