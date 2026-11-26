@@ -35,7 +35,7 @@ export default function Entry({ navigation, route }) {
       // stringify it to save into async storage
       recentHistory.unshift(item);
       await AsyncStorage.setItem("journal", JSON.stringify(recentHistory));
-      console.log(recentHistory);
+      // console.log(recentHistory);
     } catch (error) {
       console.log(error);
     }
@@ -154,8 +154,9 @@ export default function Entry({ navigation, route }) {
         </Text>
       </View>
 
+      {/* Buttons to add/edit journal */}
       <View style = {styles.entryButtons}>
-        <Button title = "Location" />
+        <Button title = "Location" onPress = {() => navigation.navigate("AddLocationScreen", {journalID: item.id, categories: item.allCategories || []})} />
         <Button title = "Category" />
         <Button title = "Edit" />
       </View>
