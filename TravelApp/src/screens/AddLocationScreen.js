@@ -15,11 +15,13 @@ export default function AddLocationScreen({ navigation, route }) {
     // TO DO:
     // const [photos, setPhotos] = useState(null);
 
+    // variables to control the categories dropdown: https://builtin.com/articles/react-native-dropdown
     const [isDropdownVisible, setDropDownVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     // callback function to change the visibility of the dropdown
     const toggleDropdown = () => setDropDownVisible(!isDropdownVisible);
 
+    // function that handles the user selecting the category of the location, sets the category and "closes" the dropdown
     function handleSelect(item) {
         setSelectedCategory(item);
         setDropDownVisible(false);
@@ -73,6 +75,7 @@ export default function AddLocationScreen({ navigation, route }) {
             </View>
             
             {/* TODO: Styling for Category Selection */}
+            {/* followed this to create the dropdown selection: https://builtin.com/articles/react-native-dropdown */}
             <View>
                 <TouchableOpacity onPress = {toggleDropdown}>
                     <Text>
