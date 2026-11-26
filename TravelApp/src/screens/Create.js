@@ -20,7 +20,8 @@ import { db } from "../firebaseConfig";
 export default function Create() {
   //variables
   const [journalName, setJournalName] = useState("");
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState("");
+  const [suggestedLocation, setSuggestedLocation] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [image, setImage] = useState(null);
@@ -84,7 +85,8 @@ export default function Create() {
   //function used to clear all the fields back to initial state after uploading the journal to the cloud storage
   function clearFields() {
     setJournalName("");
-    setLocation(null);
+    setLocation("");
+    setSuggestedLocation([]);
     setStartDate(null);
     setEndDate(null);
     setImage(null);
@@ -111,6 +113,21 @@ export default function Create() {
     }
   }
 
+  // function that allows for autocomplete search of users locations to ensure that their location is valid: https://www.geoapify.com/address-autocomplete/
+  async function searchLocation(city) {
+    try {
+      // fetching the information
+      const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${city}&type=city&limit=5&format=json&apiKey=0575ebf5a0774802b8811d98b59a84d2`);
+      
+      const data = await response.json();
+      // settings the data as the suggested locations the api returns back to then show users later
+      setSuggestedLocation(data.results || []);
+    } catch (e) {
+      console.log("An error occured searching for locations: ", e);
+      setSuggestedLocation([]);
+    }
+  }
+
   const navigation = useNavigation();
 
   return (
@@ -133,16 +150,35 @@ export default function Create() {
           placeholder="e.g., Rome 2025"
         />
       </View>
+
       {/* select location input */}
-      {/* probably use an api so its like an autocomplete when users are typing, makes sure its a real place + extra api! */}
       <View style={styles.createInputContainer}>
         <Text style={styles.createInputHeader}>Select Your Location*</Text>
+
         <TextInput
           style={styles.createInput}
           value={location}
-          onChangeText={setLocation}
+          onChangeText={(text) => {
+            setLocation(text);
+            searchLocation(text);
+          }}
           placeholder="Rome, Italy"
         />
+
+        {/* displaying the suggested locations from the api call */}
+        {suggestedLocation.map((location, index) => (
+          // creating pressable elements for user to select their location from the suggested ones, once selected it clears the suggested array and sets the location as the selected location
+          <Pressable
+            key = {index}
+            onPress = {() => {
+              // .formatted is part of the api response and returns the formatted version of the location selected rather than the full object
+              setLocation(location.formatted);
+              setSuggestedLocation([]);
+            }}
+          >
+            <Text>{location.formatted}</Text>
+          </Pressable>
+        ))}
       </View>
       {/* date input */}
       {/* rough looking, will fix later just seeing functionality */}
@@ -247,9 +283,10 @@ export default function Create() {
       <Pressable
         style={styles.createJournalButton}
         onPress={() => {
+          // checking to ensure all required fields have a value before creating the journal
           if (
-            journalName !== null &&
-            location !== null &&
+            journalName !== "" &&
+            location !== "" &&
             startDate !== null &&
             endDate !== null
           ) {
