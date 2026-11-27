@@ -103,7 +103,7 @@ export default function Entry({ navigation, route }) {
       // console.log(countryName);
 
       // calling https://restcountries.com/ api to get the journal location country flag to display
-      const response = await fetch (`https://api.restcountries.com/countries/v5?q=${countryName}`,
+      const response = await fetch(`https://api.restcountries.com/countries/v5?q=${countryName}`,
         { headers: { 'Authorization': 'Bearer rc_live_c2d46a4478814dba9e138e5f47049045' } });
       const data = await response.json();
 
@@ -142,9 +142,19 @@ export default function Entry({ navigation, route }) {
 
       <Text style={styles.journalTitle}>{item.journalName}</Text>
 
+
+      {/* COVER IMAGE */}
+      {/* display if coverImage property is available */}
+      {item.coverImage && (
+        <Image
+          source={{ uri: item.coverImage }}
+          style={{ width: 150, height: 150 }}
+        />
+      )}
+
       {/* TO DO styling */}
       <View>
-        <Image source={{uri: countryFlag}} style = {styles.flagImage}/>
+        <Image source={{ uri: countryFlag }} style={styles.flagImage} />
         <Text style={styles.journalSubtitle}>{item.location}</Text>
         {/* converting from a firebase timestamp into a js date object: https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp */}
         {/* converting from a js date object into a readable string to display in text: https://www.freecodecamp.org/news/how-to-format-a-date-with-javascript-date-formatting-in-js/ */}
@@ -155,34 +165,34 @@ export default function Entry({ navigation, route }) {
       </View>
 
       {/* Buttons to add/edit journal */}
-      <View style = {styles.entryButtons}>
-        <Button title = "Location" onPress = {() => navigation.navigate("AddLocationScreen", {journalID: item.id, categories: item.allCategories || []})} />
-        <Button title = "Category" />
-        <Button title = "Edit" />
+      <View style={styles.entryButtons}>
+        <Button title="Location" onPress={() => navigation.navigate("AddLocationScreen", { journalID: item.id, categories: item.allCategories || [] })} />
+        <Button title="Category" />
+        <Button title="Edit" />
       </View>
 
       {/*create the map view, pass the location found in the async function into the initial region*/}
       <MapView style={styles.journalMap} initialRegion={journalLoc} />
-      
+
       {/* Adding text between array string items: https://dev.to/ofthewildfire/javascript-string-manipulation-how-to-use-split-reverse-and-join-4ojf */}
       {/* {categories ? <Text style={styles.journalCategories}>{categories.join(", ")}</Text> : <Text style={styles.journalCategories}>No categories</Text>} */}
-      
+
       <View>
         <Text>Categories</Text>
-        {categories ? 
-        <View style = {styles.categoryGrid}>
-          {categories.map((category) => (
-            <View key = {category.id} style = {styles.categoryFolder}>
-              <Text>{category.name}</Text>
-            </View>
-          ))}
-        </View>
-        : 
-        <Text style={styles.journalCategories}>No categories</Text>}
+        {categories ?
+          <View style={styles.categoryGrid}>
+            {categories.map((category) => (
+              <View key={category.id} style={styles.categoryFolder}>
+                <Text>{category.name}</Text>
+              </View>
+            ))}
+          </View>
+          :
+          <Text style={styles.journalCategories}>No categories</Text>}
       </View>
 
       {/* journal delete button */}
-      <Pressable onPress = {() => deleteJournal(item.id)} style = {styles.signOutButton}>
+      <Pressable onPress={() => deleteJournal(item.id)} style={styles.signOutButton}>
         <Text style={{ color: 'white', fontWeight: 'bold' }}>Delete</Text>
       </Pressable>
     </ScrollView>

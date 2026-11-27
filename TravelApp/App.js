@@ -59,10 +59,10 @@ export default function App() {
           component={Entry}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-          name = "AddLocationScreen"
-          component = {AddLocationScreen}
-          option = {{ headerShown: false }}
+        <Stack.Screen
+          name="AddLocationScreen"
+          component={AddLocationScreen}
+          option={{ headerShown: false }}
         />
       </Stack.Navigator>
     );

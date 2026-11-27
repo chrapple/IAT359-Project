@@ -31,16 +31,25 @@ export default function Create() {
   const [addedNewJournal, setaddedNewJournal] = useState("False");
 
   // function for the user to pick an image from their camera roll
+
+  // DOCUMENTATION: (do the same to takePhoto function)
+  // https://docs.expo.dev/versions/latest/sdk/imagepicker/
   async function pickImage() {
     // getting the image the user picked
     const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
       mediaTypes: ["images"],
-      quality: 1,
+      // firestore has a limit of 1 MB so reduce quality and allow editing
+      // try lowering quality even more if not working
+      quality: 0.5,
+      base64: true,
     });
 
     // setting the image picked as the one that will be used
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      // image data needs to be a base64 string (probably the right answer on the midterm lol) so replaced uri with base64
+      // need the data:image/jpeg;base64 so that it can be read by Image element 
+      setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     }
   }
 
@@ -57,12 +66,13 @@ export default function Create() {
     // this opens the camera and allows the user to take a photo
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      quality: 1,
+      quality: 0.5,
+      base64: true,
     });
 
     // sets the image taken as the image they will use
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     }
   }
 
@@ -103,6 +113,7 @@ export default function Create() {
         endDate: endDate,
         // TO DO:
         // COVER IMAGE,
+        coverImage: image,
         allCategories: allCategories,
       });
       console.log("Document written with ID: ", docRef.Id);
@@ -118,7 +129,7 @@ export default function Create() {
     try {
       // fetching the information
       const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${city}&type=city&limit=5&format=json&apiKey=0575ebf5a0774802b8811d98b59a84d2`);
-      
+
       const data = await response.json();
       // settings the data as the suggested locations the api returns back to then show users later
       setSuggestedLocation(data.results || []);
@@ -169,8 +180,8 @@ export default function Create() {
         {suggestedLocation.map((location, index) => (
           // creating pressable elements for user to select their location from the suggested ones, once selected it clears the suggested array and sets the location as the selected location
           <Pressable
-            key = {index}
-            onPress = {() => {
+            key={index}
+            onPress={() => {
               // .formatted is part of the api response and returns the formatted version of the location selected rather than the full object
               setLocation(location.formatted);
               setSuggestedLocation([]);
@@ -266,7 +277,7 @@ export default function Create() {
           )}
         </FlatList> */}
 
-        {allCategories. map((category) => (
+        {allCategories.map((category) => (
           <View style={styles.createCategoriesDisplay} key={category.id}>
             <Text>{category.name}</Text>
             {/* IMPLEMENT EDIT */}
