@@ -1,10 +1,11 @@
-import { Text, View, TextInput, Pressable, TouchableOpacity, FlatList, Alert } from "react-native";
+import { Text, View, ScrollView, TextInput, Pressable, TouchableOpacity, FlatList, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import StarRating from "react-native-star-rating-widget";
 import DatePicker from "react-native-ui-datepicker";
 import styles from "../styles";
+import { Feather } from "@react-native-vector-icons/feather";
 
 export default function AddLocationScreen({ navigation, route }) {
     // route params
@@ -80,18 +81,19 @@ export default function AddLocationScreen({ navigation, route }) {
     }
 
     return (
-        <View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
             <Pressable
                 style={styles.journalBackButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text>Back</Text>
+                {/* using feather icons: https://www.npmjs.com/package/@react-native-vector-icons/common#available-icon-sets, https://feathericons.com/*/}
+                <Feather name="arrow-left" size={32} color={"#000"}/>
             </Pressable>
             {/* TODO: Styling for Location input*/}
-            <View>
-                <Text>Location</Text>
+            <View style = {styles.createInputContainer}>
+                <Text style = {styles.subheader}>Location</Text>
                 <TextInput
-                    // style={styles.createInput}
+                    style={styles.createInput}
                     value = {location}
                     onChangeText = {(text) => {
                         setLocation(text);
@@ -119,15 +121,21 @@ export default function AddLocationScreen({ navigation, route }) {
             
             {/* TODO: Styling for Category Selection */}
             {/* followed this to create the dropdown selection: https://builtin.com/articles/react-native-dropdown */}
-            <View>
+            <View style = {styles.createInputContainer}> 
+                <Text style = {styles.subheader}>Select a Category</Text>
                 <TouchableOpacity onPress = {toggleDropdown}>
                     <Text>
-                        {selectedCategory ? selectedCategory.name : "Select a Category"}
+                        {selectedCategory ? selectedCategory.name : "Category"}
                     </Text>
                 </TouchableOpacity>
                 {isDropdownVisible && (
                     <View>
-                        <FlatList
+                        {categories.map((item) => (
+                            <TouchableOpacity onPress = {() => handleSelect(item)}>
+                                <Text>{item.name}</Text>
+                            </TouchableOpacity>
+                        ))}
+                        {/* <FlatList
                             data = {categories}
                             keyExtractor={(item) => item.id}
                             renderItem = {({item}) => (
@@ -135,15 +143,15 @@ export default function AddLocationScreen({ navigation, route }) {
                                     <Text>{item.name}</Text>
                                 </TouchableOpacity>
                             )}
-                        />
+                        /> */}
                     </View>
                 )}
             </View>
 
             {/* TODO: Styling for Date Visited */}
             {/* using react-native-ui-datepicker to allow user to pick their date visited on a calendar: https://github.com/farhoudshapouran/react-native-ui-datepicker? */}
-            <View>
-                <Text>Date Visited</Text>
+            <View style = {styles.createInputContainer}>
+                <Text style = {styles.subheader}>Date Visited</Text>
                 <DatePicker
                     mode="single"
                     date={date}
@@ -158,7 +166,8 @@ export default function AddLocationScreen({ navigation, route }) {
             
             {/* TODO: Styling for Rating Input*/}
             {/* Using react-native-star-rating-widget to allow for user input in rating: https://www.npmjs.com/package/react-native-star-rating-widget */}
-            <View>
+            <View style = {styles.createInputContainer}>
+                <Text style = {styles.subheader}>Your Rating</Text>
                 <StarRating
                     rating={rating}
                     onChange={setRating}
@@ -168,23 +177,24 @@ export default function AddLocationScreen({ navigation, route }) {
             </View>
             
             {/* TODO: Styling for Notes */}
-            <View>
-                <Text>Notes</Text>
+            <View style = {styles.createInputContainer}>
+                <Text style = {styles.subheader}>Notes</Text>
                 <TextInput
                     value = {notes}
                     onChangeText = {setNotes}
                     placeholder = "e.g., The food was delicious!"
+                    style = {styles.createInput}
                 />
             </View>
 
             {/* TODO: Styling for Photos */}
-            <View>
-                <Text>Photo Gallery</Text>
+            <View style = {styles.createInputContainer}>
+                <Text style = {styles.subheader}>Photo Gallery</Text>
             </View>
 
-            <Pressable onPress={() => addLocation()}>
+            <Pressable onPress={() => addLocation()} style={styles.createJournalButton}>
                 <Text>Add Location</Text>
             </Pressable>
-        </View>
+        </ScrollView>
     )
 }

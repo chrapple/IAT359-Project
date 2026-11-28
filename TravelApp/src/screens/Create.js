@@ -27,7 +27,7 @@ export default function Create() {
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
   const [allCategories, setAllCategories] = useState([]);
-  
+
   const [addedNewJournal, setaddedNewJournal] = useState("False");
 
   // function for the user to pick an image from their camera roll
@@ -142,7 +142,7 @@ export default function Create() {
       </Pressable>
       {/* travel journal name input */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Travel Journal Name*</Text>
+        <Text style={styles.subheader}>Travel Journal Name*</Text>
         <TextInput
           style={styles.createInput}
           value={journalName}
@@ -153,7 +153,7 @@ export default function Create() {
 
       {/* select location input */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Select Your Location*</Text>
+        <Text style={styles.subheader}>Select Your Location*</Text>
 
         <TextInput
           style={styles.createInput}
@@ -185,7 +185,7 @@ export default function Create() {
       {/* rough looking, will fix later just seeing functionality */}
       {/* react native calendar so we can have data range pick for users: https://withfra.me/react-native-tutorials/how-to-use-date-picker-in-react-native, https://github.com/farhoudshapouran/react-native-ui-datepicker? */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Dates*</Text>
+        <Text style={styles.subheader}>Dates*</Text>
         <DatePicker
           mode="range"
           startDate={startDate}
@@ -210,7 +210,7 @@ export default function Create() {
 
       {/* uploading or taking pictures: https://docs.expo.dev/versions/latest/sdk/imagepicker/ */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Upload Your Cover</Text>
+        <Text style={styles.subheader}>Upload Your Cover</Text>
         <View style={styles.createUploadImageContainer}>
           <View style={styles.createUploadButtons}>
             <Pressable onPress={pickImage} style={styles.testingButton}>
@@ -233,7 +233,7 @@ export default function Create() {
       </View>
       {/* creating categories */}
       <View style={styles.createInputContainer}>
-        <Text style={styles.createInputHeader}>Add Categories</Text>
+        <Text style={styles.subheader}>Add Categories</Text>
 
         {/* section for the input and add button */}
         <View style={styles.createCategoriesInput}>

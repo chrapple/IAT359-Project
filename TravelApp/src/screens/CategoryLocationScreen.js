@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import styles from "../styles";
+import { Feather } from "@react-native-vector-icons/feather";
 
 export default function AddLocationScreen({ navigation, route }) {
     // route params
@@ -47,7 +48,8 @@ export default function AddLocationScreen({ navigation, route }) {
                 style={styles.journalBackButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text>Back</Text>
+                {/* using feather icons: https://www.npmjs.com/package/@react-native-vector-icons/common#available-icon-sets, https://feathericons.com/*/}
+                <Feather name="arrow-left" size={32} color={"#000"}/>
             </Pressable>
 
             <Text>{category.name}</Text>

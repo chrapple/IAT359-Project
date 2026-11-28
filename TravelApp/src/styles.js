@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 25,
   },
+  container2: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    paddingTop: 25
+  },
   scrollContainer: {
     flexGrow: 1,
     backgroundColor: "#fff",
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginBottom: 50,
   },
-  createInputHeader: {
+  subheader: {
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -182,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf: "center",
     marginTop: 20,
-    marginBottom: 100,
+    marginBottom: 50,
   },
   // journals display page
   journalList: {
@@ -209,11 +215,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   journalBackButton: {
-    backgroundColor: "#D9D9D9",
-    padding: 10,
+    // backgroundColor: "#D9D9D9",
+    // padding: 10,
     paddingLeft: 20,
-    paddingRight: 20,
-    borderRadius: 20,
+    // paddingRight: 20,
+    // borderRadius: 20,
     alignSelf: "flex-start",
   },
   journalTitle: {

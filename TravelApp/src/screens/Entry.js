@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect, useRef } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { Feather } from "@react-native-vector-icons/feather";
 
 export default function Entry({ navigation, route }) {
   const { item } = route.params;
@@ -141,7 +142,8 @@ export default function Entry({ navigation, route }) {
         style={styles.journalBackButton}
         onPress={() => navigation.goBack()}
       >
-        <Text>Back</Text>
+        {/* using feather icons: https://www.npmjs.com/package/@react-native-vector-icons/common#available-icon-sets, https://feathericons.com/*/}
+        <Feather name="arrow-left" size={32} color={"#000"}/>
       </Pressable>
 
       <Text style={styles.journalTitle}>{item.journalName}</Text>
@@ -172,7 +174,7 @@ export default function Entry({ navigation, route }) {
       {/* {categories ? <Text style={styles.journalCategories}>{categories.join(", ")}</Text> : <Text style={styles.journalCategories}>No categories</Text>} */}
       
       <View>
-        <Text>Categories</Text>
+        <Text style = {styles.subheader}>Categories</Text>
         {categories ? 
         <View style = {styles.categoryGrid}>
           {categories.map((category) => (
