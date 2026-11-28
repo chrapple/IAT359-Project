@@ -15,6 +15,7 @@ import Journals from "./src/screens/Journals";
 import Settings from "./src/screens/Settings";
 import Entry from "./src/screens/Entry";
 import AddLocationScreen from "./src/screens/AddLocationScreen";
+import CategoryLocationScreen from "./src/screens/CategoryLocationScreen";
 
 export default function App() {
   // create navigators
@@ -62,7 +63,12 @@ export default function App() {
         <Stack.Screen 
           name = "AddLocationScreen"
           component = {AddLocationScreen}
-          option = {{ headerShown: false }}
+          options = {{ headerShown: false }}
+        />
+        <Stack.Screen
+          name = "CategoryLocationScreen"
+          component = {CategoryLocationScreen}
+          options = {{ headerShown: false }}
         />
       </Stack.Navigator>
     );

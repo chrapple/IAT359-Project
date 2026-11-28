@@ -12,6 +12,7 @@ export default function AddLocationScreen({ navigation, route }) {
 
     // variables to hold user input
     const [location, setLocation] = useState("");
+    const [locationName, setLocationName] = useState("");
     const [suggestedLocation, setSuggestedLocation] = useState([]);
     // would've set to null but that caused an error, resolved by following the last comment saying to set to undefined: https://github.com/farhoudshapouran/react-native-ui-datepicker/issues/60?
     const [date, setDate] = useState(undefined);
@@ -35,20 +36,21 @@ export default function AddLocationScreen({ navigation, route }) {
     // function that allows for autocomplete search of users locations to ensure that their location is valid: https://www.geoapify.com/address-autocomplete/
     async function searchLocation(address) {
         try {
-        // fetching the information
-        const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${address}&limit=5&format=json&apiKey=0575ebf5a0774802b8811d98b59a84d2`);
-        
-        const data = await response.json();
-        // settings the data as the suggested locations the api returns back to then show users later
-        setSuggestedLocation(data.results || []);
+            // fetching the information
+            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${address}&limit=5&format=json&apiKey=0575ebf5a0774802b8811d98b59a84d2`);
+            
+            const data = await response.json();
+            // settings the data as the suggested locations the api returns back to then show users later
+            setSuggestedLocation(data.results || []);
         } catch (e) {
         console.log("An error occured searching for locations: ", e);
-        setSuggestedLocation([]);
+            setSuggestedLocation([]);
         }
     }
 
     function clearFields() {
         setLocation("");
+        setLocationName("");
         setSelectedCategory(null);
         setDate(undefined);
         setRating(0)
@@ -62,6 +64,7 @@ export default function AddLocationScreen({ navigation, route }) {
         try {
             const docRef = await addDoc(collection(db, "journals", journalID, "locations"), {
                 location: location,
+                locationName: locationName,
                 categoryID: selectedCategory.id,
                 categoryName: selectedCategory.name,
                 dateVisited: date,
@@ -78,6 +81,12 @@ export default function AddLocationScreen({ navigation, route }) {
 
     return (
         <View>
+            <Pressable
+                style={styles.journalBackButton}
+                onPress={() => navigation.goBack()}
+            >
+                <Text>Back</Text>
+            </Pressable>
             {/* TODO: Styling for Location input*/}
             <View>
                 <Text>Location</Text>
@@ -97,10 +106,12 @@ export default function AddLocationScreen({ navigation, route }) {
                     key = {index}
                     onPress = {() => {
                     // .formatted is part of the api response and returns the formatted version of the location selected rather than the full object
-                    setLocation(location.formatted);
+                    setLocation(location.address_line2);
+                    setLocationName(location.name);
                     setSuggestedLocation([]);
                     }}
                 >
+                    {/* <Text>{location.name}</Text> */}
                     <Text>{location.formatted}</Text>
                 </Pressable>
                 ))}

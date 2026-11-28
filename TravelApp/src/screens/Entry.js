@@ -130,6 +130,10 @@ export default function Entry({ navigation, route }) {
   })) : null;
   // console.log(categories);
 
+  // function openCategoryPage() {
+
+  // }
+
   return (
     // <ScrollView style={styles.journalContainer}>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -172,13 +176,26 @@ export default function Entry({ navigation, route }) {
         {categories ? 
         <View style = {styles.categoryGrid}>
           {categories.map((category) => (
-            <View key = {category.id} style = {styles.categoryFolder}>
+            <Pressable 
+              key = {category.id}
+              style = {styles.categoryFolder}
+              onPress = {() => navigation.navigate("CategoryLocationScreen", {
+                journalID: item.id,
+                category: category
+              })}
+            >
               <Text>{category.name}</Text>
-            </View>
+            </Pressable>
+            // <View key = {category.id} style = {styles.categoryFolder}>
+            //   {/* <Text>{category.name}</Text> */}
+            //   <Pressable>
+            //     <Text>{category.name}</Text>
+            //   </Pressable>
+            // </View>
           ))}
         </View>
         : 
-        <Text style={styles.journalCategories}>No categories</Text>}
+        <Text>No categories</Text>}
       </View>
 
       {/* journal delete button */}
