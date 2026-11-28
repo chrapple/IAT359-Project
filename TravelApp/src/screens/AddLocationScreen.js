@@ -1,7 +1,10 @@
-import { Text, View, TextInput, Pressable, TouchableOpacity, FlatList } from "react-native";
-import { useState } from "react";
+import { Text, View, TextInput, Pressable, TouchableOpacity, FlatList, Alert } from "react-native";
+import { useState, useEffect } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import StarRating from "react-native-star-rating-widget";
+import DatePicker from "react-native-ui-datepicker";
+import styles from "../styles";
 
 export default function AddLocationScreen({ navigation, route }) {
     // route params
@@ -10,6 +13,8 @@ export default function AddLocationScreen({ navigation, route }) {
     // variables to hold user input
     const [location, setLocation] = useState("");
     const [suggestedLocation, setSuggestedLocation] = useState([]);
+    // would've set to null but that caused an error, resolved by following the last comment saying to set to undefined: https://github.com/farhoudshapouran/react-native-ui-datepicker/issues/60?
+    const [date, setDate] = useState(undefined);
     const [rating, setRating] = useState(0);
     const [notes, setNotes] = useState("");
     // TO DO:
@@ -42,7 +47,34 @@ export default function AddLocationScreen({ navigation, route }) {
         }
     }
 
+    function clearFields() {
+        setLocation("");
+        setSelectedCategory(null);
+        setDate(undefined);
+        setRating(0)
+        setNotes("")
+    }
+
     // TODO: Add to Firebase
+    // creating a subcollection within the journals collection (only creates if it's the first location added)
+    // adds new locations into the subcollection with category id to reference back to when displaying locations of a specific category (since we are using a filtering system it's important to keep the category id to match)
+    async function addLocation() {
+        try {
+            const docRef = await addDoc(collection(db, "journals", journalID, "locations"), {
+                location: location,
+                categoryID: selectedCategory.id,
+                categoryName: selectedCategory.name,
+                dateVisited: date,
+                rating: rating,
+                notes: notes
+                // TODO: photos
+            });
+            clearFields();
+            Alert.alert(`${location} has been added!`);
+        } catch (e) {
+            console.error("Error adding location: ", e);
+        }
+    }
 
     return (
         <View>
@@ -98,13 +130,30 @@ export default function AddLocationScreen({ navigation, route }) {
             </View>
 
             {/* TODO: Styling for Date Visited */}
+            {/* using react-native-ui-datepicker to allow user to pick their date visited on a calendar: https://github.com/farhoudshapouran/react-native-ui-datepicker? */}
             <View>
-
+                <Text>Date Visited</Text>
+                <DatePicker
+                    mode="single"
+                    date={date}
+                    onChange={({date}) => setDate(date)}
+                    styles={{
+                        today: styles.datePickerToday,
+                        selected: styles.datePickerSelected,
+                        selected_label: styles.datePickerSelectedLabel
+                    }}
+                />
             </View>
-
+            
             {/* TODO: Styling for Rating Input*/}
+            {/* Using react-native-star-rating-widget to allow for user input in rating: https://www.npmjs.com/package/react-native-star-rating-widget */}
             <View>
-                
+                <StarRating
+                    rating={rating}
+                    onChange={setRating}
+                    step={"full"}
+                    animationConfig={{scale: 1}}
+                />
             </View>
             
             {/* TODO: Styling for Notes */}
@@ -122,7 +171,7 @@ export default function AddLocationScreen({ navigation, route }) {
                 <Text>Photo Gallery</Text>
             </View>
 
-            <Pressable>
+            <Pressable onPress={() => addLocation()}>
                 <Text>Add Location</Text>
             </Pressable>
         </View>

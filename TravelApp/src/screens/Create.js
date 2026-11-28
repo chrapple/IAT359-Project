@@ -27,7 +27,7 @@ export default function Create() {
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState("");
   const [allCategories, setAllCategories] = useState([]);
-
+  
   const [addedNewJournal, setaddedNewJournal] = useState("False");
 
   // function for the user to pick an image from their camera roll
@@ -180,6 +180,7 @@ export default function Create() {
           </Pressable>
         ))}
       </View>
+
       {/* date input */}
       {/* rough looking, will fix later just seeing functionality */}
       {/* react native calendar so we can have data range pick for users: https://withfra.me/react-native-tutorials/how-to-use-date-picker-in-react-native, https://github.com/farhoudshapouran/react-native-ui-datepicker? */}
@@ -206,6 +207,7 @@ export default function Create() {
         <Text>Start: {String(startDate)}</Text>
         <Text>End: {String(endDate)}</Text>
       </View>
+
       {/* uploading or taking pictures: https://docs.expo.dev/versions/latest/sdk/imagepicker/ */}
       <View style={styles.createInputContainer}>
         <Text style={styles.createInputHeader}>Upload Your Cover</Text>
